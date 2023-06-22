@@ -73,7 +73,7 @@ function Footer() {
               </Link>
 
               <Link
-                href="https://github.com/bellapd/teachme"
+                href="https://github.com/gevyndo/belajar"
                 className="text-white hover:text-white"
               >
                 <svg
