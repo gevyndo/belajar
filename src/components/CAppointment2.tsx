@@ -3,77 +3,82 @@ import Image from "next/image";
 import { Typography, Checkbox, Button } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import emailjs from 'emailjs-com';
-import {useUser } from '@clerk/nextjs';
+import emailjs from "emailjs-com";
+import { useUser } from "@clerk/nextjs";
 
 // PUBLIC KEY
-emailjs.init('sMnDmOrgDr6X1RvYG')
+emailjs.init("sMnDmOrgDr6X1RvYG");
 
 function Appointment() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
-  const {user} = useUser();
+  const { user } = useUser();
 
   const updateMetadata = async () => {
-    const data= {};
+    const data = {};
     const cour = user?.unsafeMetadata?.courses;
-    console.log('res', cour);
-    if(cour === undefined){
+    console.log("res", cour);
+    if (cour === undefined) {
       const data = { courses: ["c"] };
       try {
         const response = await user?.update({
-          unsafeMetadata: data 
+          unsafeMetadata: data,
         });
         if (response) {
-          console.log('res', response)
+          console.log("res", response);
           // console.log(myarr)
         }
       } catch (err) {
-        console.error('error', err)
+        console.error("error", err);
       }
-    }
-    else{
-      const cour2 = cour?.concat("c");
+    } else {
+      const cour: string[] = []; // Assuming cour is an array of strings
+      const cour2 = cour.concat("c");
       const data = { courses: cour2 };
-      
+
       try {
         const response = await user?.update({
-          unsafeMetadata: data 
+          unsafeMetadata: data,
         });
         if (response) {
-          console.log('res', response)
+          console.log("res", response);
           // console.log(myarr)
         }
       } catch (err) {
-        console.error('error', err)
+        console.error("error", err);
       }
     }
-    
   };
 
   const templateParams = {
     to_name: user?.firstName,
     from_name: "TeachMe",
-    email: user?.primaryEmailAddress?.emailAddress
+    email: user?.primaryEmailAddress?.emailAddress,
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     // INI EDIT
-    emailjs.send("service_3m16hip", "template_73tx6bx", templateParams, "sMnDmOrgDr6X1RvYG")
-        //INI EDIT  
-    .then((result) => {
+    emailjs
+      .send(
+        "service_3m16hip",
+        "template_73tx6bx",
+        templateParams,
+        "sMnDmOrgDr6X1RvYG"
+      )
+      //INI EDIT
+      .then((result) => {
         console.log(result.text);
-        console.log(user?.firstName)
-        console.log(user?.primaryEmailAddress?.emailAddress)
-        })
-        .catch((error) => {
+        console.log(user?.firstName);
+        console.log(user?.primaryEmailAddress?.emailAddress);
+      })
+      .catch((error) => {
         console.log(error);
-        console.log(user?.firstName)
-        console.log(user?.primaryEmailAddress?.emailAddress)
-        });
-  };  
+        console.log(user?.firstName);
+        console.log(user?.primaryEmailAddress?.emailAddress);
+      });
+  };
 
   const handleCheckboxChange = () => {
     setCheckboxChecked(!checkboxChecked);
@@ -89,11 +94,13 @@ function Appointment() {
     }
   };
 
-  const [text,setText] = useState("");
+  const [text, setText] = useState("");
 
-    const handleChangeText = (event) =>{
-            setText(event.target.value);
-    };
+  const handleChangeText = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setText(event.target.value);
+  };
 
   return (
     <div id="BagProf" className="min-h-screen">
@@ -125,7 +132,6 @@ function Appointment() {
         </div>
         <br />
         <br />
-        
       </div>
       <article
         id="Profile2"
@@ -164,35 +170,40 @@ function Appointment() {
         <div className=" inline-block">
           <DatePicker
             selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+            onChange={(date) => setSelectedDate(date || null)}
             className=" py-2 inline-block"
           />
         </div>
         <div className="my-5">
-            <p>Note</p>
-                <textarea placeholder="testing" value={text} onChange={handleChangeText} className="w-full h-full p-2 border border-gray-300 rounded" />
-            </div>
+          <p>Note</p>
+          <textarea
+            placeholder="testing"
+            value={text}
+            onChange={handleChangeText}
+            className="w-full h-full p-2 border border-gray-300 rounded"
+          />
+        </div>
         <div className="flex-grow flex flex-col items-center justify-between">
           <div className="relative px-80 flex-col items-center justify-center">
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
             <Fragment>
               <p className=" inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
               <Checkbox
@@ -203,7 +214,7 @@ function Appointment() {
                 onChange={handleCheckboxChange}
               />
             </Fragment>
-            
+
             {showPrompt && (
               <Typography className="text-red-500 mt-2 font-bold">
                 Please check the checkbox before making an appointment.
@@ -216,12 +227,16 @@ function Appointment() {
               className={`inline-flex justify-center items-center mt-4 py-3 px-5 text-base font-large text-center bg-[#FFE873] text-[#4700C6] rounded-xl`}
               onClick={handleMakeAppointment}
             >
-              <Button onClick={() => {
-                // sendEmail();
-                updateMetadata()
-                }} variant="text" className="flex items-center gap-2 text-center">
-                            Make an Appointment
-            </Button>
+              <Button
+                onClick={() => {
+                  // sendEmail();
+                  updateMetadata();
+                }}
+                variant="text"
+                className="flex items-center gap-2 text-center"
+              >
+                Make an Appointment
+              </Button>
             </a>
           </div>
         </div>
