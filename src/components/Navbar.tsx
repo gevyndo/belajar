@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import {
   Navbar,
   MobileNav,
@@ -12,6 +13,7 @@ import Image from "next/image";
 export default function Example() {
   const [openNav, setOpenNav] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const router = useRouter();
 
   const toggleDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -27,12 +29,23 @@ export default function Example() {
   const navList = (
     <div className="flex items-center gap-6">
       <Typography variant="small" color="blue-gray" className="font-normal">
-        <a href="#JumpAbout" className="flex items-center focus:outline-none">
-          About
-        </a>
+      {router.pathname === "/" ? (
+          <a
+            href="#JumpAbout"
+            className=" flex items-center focus:outline-none scale-100 hover:scale-150 ease-in duration-200"
+          >
+            About
+          </a>
+        ) : (
+            <a href="/#JumpAbout" className=" flex items-center focus:outline-none scale-100 hover:scale-150 ease-in duration-200">
+              About
+            </a>
+        )}
       </Typography>
       <Typography variant="small" color="blue-gray" className="font-normal">
-        <a href="#" className="flex items-center focus:outline-none">
+
+        {/* <a href="/profiledetails" className="flex items-center focus:outline-none"></a> */}
+        <a href="communities" className="flex items-center focus:outline-none scale-100 hover:scale-150 ease-in duration-200">
           Community
         </a>
       </Typography>
@@ -40,7 +53,7 @@ export default function Example() {
         <Typography variant="small" color="blue-gray" className="font-normal">
           <a
             href="#"
-            className="flex items-center focus:outline-none"
+            className="flex items-center focus:outline-none scale-100 hover:scale-150 ease-in duration-200"
             onClick={toggleDropdown}
           >
             Course
@@ -62,14 +75,14 @@ export default function Example() {
                 Python
               </Link>
               <Link
-                href="#"
+                href="/c"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
               >
                 C
               </Link>
               <Link
-                href="#"
+                href="/docker"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
               >
@@ -87,7 +100,7 @@ export default function Example() {
       <Navbar className="sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 bg-[#4700C6]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/">
+            <Link href="/" className="flex items-center focus:outline-none scale-100 hover:scale-150 ease-in duration-200">
               <Image
                 src="/images/logonav.svg"
                 alt="logo"
@@ -99,8 +112,14 @@ export default function Example() {
           </div>
           <div className="flex items-center gap-4">
             <Link
+              href="/signup"
+              className="hidden lg:inline-block bg-[#] px-4 py-2 text-sm text-white rounded-md hover:bg-[#] scale-100 hover:scale-150 ease-in duration-200"
+            >
+              Sign Up
+            </Link>
+            <Link
               href="/signin"
-              className="hidden lg:inline-block bg-[#] px-4 py-2 text-sm text-white rounded-md hover:bg-[#]"
+              className="hidden lg:inline-block bg-[#] px-4 py-2 text-sm text-white rounded-md hover:bg-[#] scale-100 hover:scale-150 ease-in duration-200"
             >
               Sign In
             </Link>
@@ -146,7 +165,7 @@ export default function Example() {
         <MobileNav open={openNav}>
           {navList}
           <Link href="/signin">
-            <Button size="sm" fullWidth className="mb-2">
+            <Button size="sm" fullWidth className="mb-2" color="purple">
               Sign In
             </Button>
           </Link>
