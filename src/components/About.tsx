@@ -17,7 +17,7 @@ function About() {
               <h2 className="text-[#4700C6] text-3xl font-extrabold mb-2">
                 What is TeachMe?
               </h2>
-              <p className="text-lg font-normal text-gray-500 mb-4">
+              <p className="text-lg font-normal text-gray-900 mb-4">
                 TeachMe is a mentor-mentee finder app that helps connect people
                 seeking mentorship with experienced professionals in their field
                 of interest. The app allows users to create profiles and search
@@ -27,7 +27,7 @@ function About() {
                 href="#"
                 className="inline-flex justify-center items-center mt-4 py-3 px-5 text-base font-medium text-center text-[#4700C6] rounded-xl bg-[#FFE873]"
               >
-                Join TeachMe as a Mentor
+                Click to know me better!
                 <svg
                   aria-hidden="true"
                   className="ml-2 -mr-1 w-5 h-5"

@@ -17,7 +17,7 @@ function Footer() {
                 />
               </a>
               <p className="text-white justify-left font-xs mt-4">
-                teachme2023@gmail.com
+                gevyndo18@gmail.com
               </p>
             </div>
             <div className="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -55,7 +55,7 @@ function Footer() {
             <span className="text-sm text-white sm:text-center">
               © 2023{" "}
               <a href="https://flowbite.com/" className="hover:underline">
-                TeachMe
+                Gevyndo
               </a>
               . All Rights Reserved.
             </span>

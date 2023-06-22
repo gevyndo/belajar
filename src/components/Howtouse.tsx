@@ -18,8 +18,8 @@ function Howtouse() {
           <div className="bg-[#F6F4FC] rounded-lg p-8 md:p-12">
             <Image
               src="/images/find.svg"
-              width={300}
-              height={300}
+              width={250}
+              height={250}
               alt="find mentor"
             />
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
@@ -35,7 +35,7 @@ function Howtouse() {
           <div className="bg-[#FAF1FE] rounded-lg p-8 md:p-12">
             <Image
               src="/images/meet.svg"
-              width={300}
+              width={280}
               height={300}
               alt="find mentor"
             />
@@ -52,8 +52,8 @@ function Howtouse() {
           <div className="bg-[#F1F3FE] rounded-lg p-8 md:p-12">
             <Image
               src="/images/study.svg"
-              width={250}
-              height={250}
+              width={200}
+              height={200}
               alt="find mentor"
             />
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
